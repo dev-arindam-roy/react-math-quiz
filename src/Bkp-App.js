@@ -8,16 +8,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import './App.css';
 
-const operations = [
-  { sign: 'all', name: 'ALL (^)' },
-  { sign: '+', name: 'Sum (+)' },
-  { sign: '-', name: 'Subs (-)' },
-  { sign: '*', name: 'Multi (x)' },
-  { sign: '/', name: 'Divi (/)' },
-];
-
 const App = () => {
-  const [mathOption, setMathOption] = useState(operations[0].sign);
   const [totalQuestions, setTotalQuestions] = useState(5);
   const [questions, setQuestions] = useState([]);
   const [userAns, setUserAns] = useState([]);
@@ -26,6 +17,7 @@ const App = () => {
   const [timerSecond, setTimerSecond] = useState(0);
 
   const setQuestionHandler = () => {
+    let operation = ['+', '-', '*', '/'];
     let questionArrObj = [];
     if (parseInt(totalQuestions) <= 0) {
       return false;
@@ -33,37 +25,30 @@ const App = () => {
     if (parseInt(totalQuestions) > 100) {
       return false;
     }
-    let _operations = ['+', '-', '*', '/'];
     for (let i = 1; i <= totalQuestions; i++) {
       let obj = {};
       let _num1 = Math.random() * 10;
       let _num2 = Math.random() * 10;
       _num1 = _num1.toFixed(2);
       _num2 = _num2.toFixed(2);
-
+      let _act = operation[Math.floor(Math.random() * 3) + 1];
       let _res = parseFloat(0);
-
-      let _action = '';
-      if (mathOption === 'all') {
-        _action = _operations[Math.floor(Math.random() * 4)];
-      }
-
-      if (mathOption === '+' || (_action !== '' && _action === '+')) {
+      if (_act === '+') {
         _res = parseFloat(_num1) + parseFloat(_num2);
         _res = _res.toFixed(2);
         obj['question'] = _num1 + ' + ' + _num2 + ' = ? ';
       }
-      if (mathOption === '-' || (_action !== '' && _action === '-')) {
+      if (_act === '-') {
         _res = parseFloat(_num1) - parseFloat(_num2);
         _res = _res.toFixed(2);
         obj['question'] = _num1 + ' - ' + _num2 + ' = ? ';
       }
-      if (mathOption === '*' || (_action !== '' && _action === '*')) {
+      if (_act === '*') {
         _res = parseFloat(_num1) * parseFloat(_num2);
         _res = _res.toFixed(2);
         obj['question'] = _num1 + ' x ' + _num2 + ' = ? ';
       }
-      if (mathOption === '/' || (_action !== '' && _action === '/')) {
+      if (_act === '/') {
         _res = parseFloat(_num1) / parseFloat(_num2);
         _res = _res.toFixed(2);
         obj['question'] = _num1 + ' / ' + _num2 + ' = ? ';
@@ -79,7 +64,6 @@ const App = () => {
   };
 
   const resetQuestionHandler = () => {
-    setMathOption(operations[0].sign);
     setQuestions([]);
     setIsExamStart(false);
     setTotalQuestions(5);
@@ -169,22 +153,7 @@ const App = () => {
               <tbody>
                 <tr>
                   <td>
-                    <select
-                      name='math_options'
-                      id='mathOptions'
-                      value={mathOption}
-                      disabled={isExamStart ? true : false}
-                      onChange={(e) => setMathOption(e.target.value)}
-                    >
-                      {operations.map((item, index) => {
-                        return (
-                          <option value={item.sign} key={'mathOptions' + index}>
-                            {item.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <label className='mx-2'>Number Of Question:</label>
+                    <label>Number Of Question:</label>
                     <input
                       type='number'
                       min={1}
