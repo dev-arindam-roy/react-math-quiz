@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-math-quiz/static/css/main.1dd6bc18.css",
+    "main.js": "/react-math-quiz/static/js/main.9da9897e.js",
+    "static/js/453.6d9ab3c9.chunk.js": "/react-math-quiz/static/js/453.6d9ab3c9.chunk.js",
+    "index.html": "/react-math-quiz/index.html",
+    "main.1dd6bc18.css.map": "/react-math-quiz/static/css/main.1dd6bc18.css.map",
+    "main.9da9897e.js.map": "/react-math-quiz/static/js/main.9da9897e.js.map",
+    "453.6d9ab3c9.chunk.js.map": "/react-math-quiz/static/js/453.6d9ab3c9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1dd6bc18.css",
+    "static/js/main.9da9897e.js"
+  ]
+}
